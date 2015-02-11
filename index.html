@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>The Internet of Nodebots</title>
+
+  <meta name="description" content="Because who doesn't love JavaScript powered little robotic friends">
+  <meta name="author" content="Jenny Tong">
+
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=no">
+
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if (window.location.search.match(/print-pdf/gi)) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'css/print/pdf.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+  </script>
+  <script>
+    var currentSlide = 0;
+    
+  </script>
+
+  <script src="https://cdn.firebase.com/js/client/2.1.2/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/jQuery.tubeplayer.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+
+  <style>
+    .openlayers-map img {
+      margin: 0;
+    }
+
+    #map-canvas img {
+      max-width: none;
+      max-height: none;
+      box-shadow: none;
+    }
+
+    .slides section {
+      font-size: 125%;
+    }
+
+    .slides section img {
+      background: none;
+      box-shadow: none;
+      border: none;
+    }
+
+    .reveal pre code {
+      font-size: 120%;
+    }
+
+    ul.multicol li {
+      display: inline-block;
+      width: 400px;
+      height: 400px;
+    }
+
+    ul.multicol li li {
+      display: block;
+      width: auto;
+      height: auto;
+    }
+
+    .reveal section img {
+      max-height: 65%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="reveal">
+
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+<section class="center">
+  <h1 style="font-size: 2em">The Internet of Nodebots</h1>
+  <br/>
+  <small style="float: right;">Created by Jenny Tong</small>
+</section>
+
+<section>
+  <div>
+    <img src="img/jenny.jpg" style="border-radius: 150px; float: left; margin-right: 40px; width: 300px;">
+    <br/>
+
+    <div style="width: 600px; float: right;">
+      <h3>Jenny Tong</h3>
+      Developer Advocate<br/>
+      <img src="img/firebase-logo.png" style="margin: 10px; height: 60px;"/><br/>
+      <br/>
+      <a href="https://plus.google.com/+mimming">+mimming</a><br/>
+      <a href="https://twitter.com/mimmingcodes">@MimmingCodes</a>
+    </div>
+  </div>
+</section>
+
+<section data-markdown><script type="text/template">
+![a picture of a cat](img/cats/curious-cat-2.jpg)
+</script></section>
+
+<section data-markdown>
+  <script type="text/template">
+    ## Jenny Interrogates
+
+    - Have you ever built a robot? <!-- .element: class="fragment" -->
+    - Are robots hard? <!-- .element: class="fragment" -->
+    - Is programming JavaScript hard? <!-- .element: class="fragment" -->
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+    ## Agenda
+
+    - What the heck is the Internet of NodeBots?
+    - Anatomy of an Internet-NodeBot
+    - Build the "Hello, World!" of electronics
+    - Demo
+  </script>
+</section>
+
+  <section>
+    <h2>Anatomy of a NodeBot</h2>
+
+    <img src="img/pi_and_uno.jpg" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
+    <img src="img/node.png" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
+    <img src="img/johnny-five.png" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
+    <img src="img/happy-cloud.png" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
+
+  </section>
+
+  
+  <section data-markdown>
+    <script type="text/template">
+      ## Why use the Internet?
+
+      - One of many wireless options: ZigBee, Z-Wave, Bluetooth...
+      - We could even us a wire!
+          
+          <br/>
+      ## Because <!-- .element: class="fragment"  data-fragment-index="1"-->
+          
+      - It's already there <!-- .element: class="fragment"  data-fragment-index="1"-->
+      - From anywhere, to anywhere <!-- .element: class="fragment"  data-fragment-index="1"-->
+      - Abstracts away a lot of complexity <!-- .element: class="fragment"  data-fragment-index="1"-->
+    </script>
+  </section>
+
+  <section data-markdown><script type="text/template">
+    ![a picture of a different cat](img/cats/curious-cat.jpg)
+  </script></section>
+
+
+  <section data-markdown>
+    <script type="text/template">
+      ## Let's build something!
+    </script>
+  </section>
+
+  <section data-markdown>
+    <script type="text/template">
+      ## Robot build checklist
+
+      - Arduino Uno has Firmata <!-- .element: class="fragment" -->
+      - Button & LED circuit built <!-- .element: class="fragment" -->
+      - Raspberry Pi has node.js, Johnny-Five, and Firebase <!-- .element: class="fragment" -->
+      - Code! <!-- .element: class="fragment" -->
+         - Read the button state
+         - Write to a demo Firebase
+         - Read it back out, light up an LED
+    </script>
+  </section>
+
+  <section>
+    <h2>Now what?</h2>
+    <div style="margin: 0 auto; width: 500px;" id='player'></div>
+    <script>
+      $(document).ready(function () {
+        // Create the video player
+        var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
+        ref.on("value", function (snapshot) {
+
+          var buttonValue = snapshot.val();
+          if (buttonValue && currentSlide == 10) {
+            $('#player').tubeplayer({
+              initialVideo: "dQw4w9WgXcQ", // A very special video
+              autoPlay: true
+            });
+
+            console.log("playing!");
+          }
+        });
+      });
+    </script>
+  </section>
+
+  <section>
+    <h2>Video Playing Code</h2>
+    <pre><code>// include js/jQuery.tubeplayer.min.js
+
+// Connect to a demo Firebase
+var ref =  new Firebase("https://firebutton.firebaseio-demo.com");
+      
+ref.child("button").on("value", function (snapshot) {
+  // Read the value
+  var buttonValue = snapshot.val();
+  // If it's true, play the video
+  if (buttonValue) {
+    $('#player').tubeplayer({
+      initialVideo: "dQw4w9WgXcQ",
+      autoPlay: true
+    });
+  }
+});</code></pre>
+  </section>
+
+  <section data-markdown>
+    <script type="text/template">
+      ## What we talked about
+
+      - NodeBots, what are they?
+      - The anatomy of a NodeBot
+      - Built one. It rickrolled us. :(
+    </script>
+  </section>
+
+  <section>
+  <h1>The End</h1>
+  <ul>
+    <li>Slides: <a
+        href="https://mimming.com/presos/internet-of-nodebots">mimming.com/presos/internet-of-nodebots</a>
+    </li>
+    <li>FireButton source: <a href="https://github.com/mimming/firebutton">github.com/mimming/firebutton</a></li>
+    <li>Johnny-Five: <a href="https://github.com/rwaldron/johnny-five">github.com/rwaldron/johnny-five</a></li>
+
+  </ul>
+  <br/><br/>
+  <span class="fragment">Questions anyone?</span>
+</section>
+
+  <section data-markdown><script type="text/template">
+    ![a cat walks away](img/cats/cat-walks-away.jpg)
+  </script></section>
+
+
+</div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    theme: "night", // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'concave', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Parallax scrolling
+    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+    // parallaxBackgroundSize: '2100px 900px',
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+      { src: 'lib/js/classList.js', condition: function () {
+        return !document.body.classList;
+      } },
+      { src: 'plugin/markdown/marked.js', condition: function () {
+        return !!document.querySelector('[data-markdown]');
+      } },
+      { src: 'plugin/markdown/markdown.js', condition: function () {
+        return !!document.querySelector('[data-markdown]');
+      } },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+        hljs.initHighlightingOnLoad();
+      } },
+      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () {
+        return !!document.body.classList;
+      } },
+      { src: 'plugin/notes/notes.js', async: true, condition: function () {
+        return !!document.body.classList;
+      } }
+    ]
+  });
+
+  // Update to display map on map-canvas when that slide loads
+  Reveal.addEventListener('slidechanged', function (event) {
+    currentSlide = event.indexh;
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,7 +1,8 @@
-# Firebase Overview
+# The Internet of NodeBots
 
-Firebase makes building realtime stuff easy. Jenny is going to show you how in about 30 minutes with slides, demos, and 
-little bit of live coding. Cut the live coding, and it takes about 10 minutes
+Do you know what’s cool? Robots. Do you know what’s cooler than robots? Internet aware robots that run JavaScript. 
+
+Jenny will show you how easy it is to combine node.js, commodity hardware, and the Internet of Things to build awesome little robotic friends. This session will include both live coding and live robot building.
 
 Slides live on [mimming.com](https://mimming.com/presos/firebase-overview/)
 
@@ -11,6 +12,8 @@ Slides live on [mimming.com](https://mimming.com/presos/firebase-overview/)
 ## About the deck
 
 Forked from the wonderful [reveal.js](https://github.com/hakimel/reveal.js)
+Awesome cat photos by [morozmoroz on Flickr](https://www.flickr.com/photos/morozmoroz/)
+The talk implements the [Firebutton project](https://github.com/mimming/firebutton)
 
 ## License
 

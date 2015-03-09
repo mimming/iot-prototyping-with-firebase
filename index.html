@@ -116,65 +116,97 @@
   </div>
 </section>
 
-<section data-markdown><script type="text/template">
-![a picture of a cat](img/cats/curious-cat-2.jpg)
-</script></section>
-
 <section data-markdown>
   <script type="text/template">
-    ## Jenny Interrogates
+    ## Questions
 
-    - Have you ever built a robot? <!-- .element: class="fragment" -->
-    - Are robots hard? <!-- .element: class="fragment" -->
-    - Is programming JavaScript hard? <!-- .element: class="fragment" -->
+    - Have you ever built a robot?
+    - Are robots hard?
+    - Is programming JavaScript hard?
   </script>
 </section>
+  
+  
 
 <section data-markdown>
   <script type="text/template">
     ## Agenda
 
+    - What NodeBots have to do with Wearables
     - What the heck is the Internet of NodeBots?
-    - Anatomy of an Internet-NodeBot
-    - Build the "Hello, World!" of electronics
-    - Demo
+    - Anatomy of an Internet aware NodeBot
+    - Build an Internet button
+    - Hack a children's tabletop game
   </script>
 </section>
-
-  <section>
-    <h2>Anatomy of a NodeBot</h2>
-
-    <img src="img/pi_and_uno.jpg" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
-    <img src="img/node.png" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
-    <img src="img/johnny-five.png" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
-    <img src="img/happy-cloud.png" style="max-height: 300px; max-width: 300px; margin: 20px;" class="fragment">
-
-  </section>
-
   
   <section data-markdown>
     <script type="text/template">
-      ## Why use the Internet?
+      ### NodeBots and Wearables
+
+      Productive prototyping
+      
+      ![](img/mithril.jpg)
+    </script>
+  </section>
+  
+  <section>
+    <h2>Anatomy of a NodeBot</h2>
+
+    <br/>
+    <img src="img/anatomy.jpg">
+    
+  </section>
+
+  <section>
+    <h2>Typical NodeBot Electronics</h2>
+
+    <img src="img/uno-kit.jpg">
+    <small>Photo credit arduino.cc</small>
+  </section>
+  
+  <section>
+    <h2>Typical NodeBot Electronics</h2>
+
+    <img src="img/uno-kit-2.jpg">
+    <small>Photo credit arduino.cc</small>
+  </section>
+
+  <section>
+    <h2>Microcontrollers</h2>
+
+    <img src="img/uno.jpg" style="width: 200px;">
+    <img src="img/lilypad.jpg" style="width: 200px; margin: 40px;" title="Photo credit arduino.cc">
+  </section>
+
+<section>
+  <h2>Tiny Computers</h2>
+  <img src="img/pi.jpg" style="width: 200px;">
+  <img src="img/yun.jpg" style="width: 200px; margin: 40px;" title="Photo credit arduino.cc">
+  <img src="img/edison.jpg" style="width: 300px;">
+</section>
+
+  <section data-markdown>
+    <script type="text/template">
+      ## The Cloud
 
       - One of many wireless options: ZigBee, Z-Wave, Bluetooth...
       - We could even us a wire!
           
-          <br/>
+      <br/>
       ## Because <!-- .element: class="fragment"  data-fragment-index="1"-->
           
       - It's already there <!-- .element: class="fragment"  data-fragment-index="1"-->
       - From anywhere, to anywhere <!-- .element: class="fragment"  data-fragment-index="1"-->
-      - Abstracts away a lot of complexity <!-- .element: class="fragment"  data-fragment-index="1"-->
+      - Abstracts away complexity <!-- .element: class="fragment"  data-fragment-index="1"-->
     </script>
   </section>
-
-  <section data-markdown><script type="text/template">
-    ![a picture of a different cat](img/cats/curious-cat.jpg)
-  </script></section>
 
   <section data-markdown>
     <script type="text/template">
       ## Let's build something!
+      
+      How about an Internet button?
     </script>
   </section>
 
@@ -197,23 +229,49 @@
     <div style="margin: 0 auto; width: 500px;" id='player'></div>
     <script>
       $(document).ready(function () {
+        $('#player').tubeplayer({
+          initialVideo: "dQw4w9WgXcQ" // A very special video
+        });
+
         // Create the video player
         var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
         ref.on("value", function (snapshot) {
 
           var buttonValue = snapshot.val();
-          if (buttonValue && currentSlide == 10) {
-            $('#player').tubeplayer({
-              initialVideo: "dQw4w9WgXcQ", // A very special video
-              autoPlay: true
-            });
-
+          if (buttonValue && currentSlide == 8) {
+            $('#player').tubeplayer("seek","0:00");
+            $('#player').tubeplayer("play");
             console.log("playing!");
           }
         });
       });
     </script>
   </section>
+
+<section>
+  <h2>Electronics</h2>
+  <img src="img/button-led.jpg">
+</section>
+<section>
+  <h2>JavaScript</h2>
+  <pre><code>board.on("ready", function () {
+  var button = new five.Button(8);
+
+  button.on("down", function () { ref.set("true"); });
+
+  button.on("up", function () { ref.set("false"); });
+
+  var led = five.Led(13);
+  ref.on("value", function(snap) {
+    if(snap.val() == "true") {
+      led.on();
+      setTimeout(function() { led.off(); }, 500);
+    } 
+  });
+});
+  </code></pre>
+  
+</section>
 
   <section>
     <h2>Video Playing Code</h2>
@@ -226,20 +284,16 @@ ref.child("button").on("value", function (snapshot) {
   // If it's true, play the video
   if (buttonValue) {
     $('#player').tubeplayer({
-      initialVideo: "dQw4w9WgXcQ",
-      autoPlay: true
+      initialVideo: "dQw4w9WgXcQ"
     });
+    $('#player').tubeplayer("play");
   }
 });</code></pre>
   </section>
-  
-  <section data-markdown><script type="text/template">
-    ![a cat sits up](img/cats/cat-sit-up.jpg)
-  </script></section>
-  
+
   <section data-markdown>
     <script type="text/template">
-      ## But robots are supposed to move! Right?
+      ## Hacking children's tabletop games
     </script>
   </section>
 
@@ -267,10 +321,6 @@ ref.child("button").on("value", function (snapshot) {
   <br/><br/>
   <span class="fragment">Questions anyone?</span>
 </section>
-
-  <section data-markdown><script type="text/template">
-    ![a cat walks away](img/cats/cat-walks-away.jpg)
-  </script></section>
 
 
 </div>

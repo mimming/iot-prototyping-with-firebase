@@ -8,6 +8,7 @@ Slides live on [mimming.com](https://mimming.com/presos/firebase-overview/)
 
 ## Presented at
 - [DeveloperWeek 2015](http://developerweek2015conferenceexpo.sched.org/event/6610a6a49ad26a81d5731e05084bb27b#.VNqdVlPF8rM) on 11 Feb 2015
+- [Wearables TechCon 2015](http://www.wearablestechcon.com/classes#InternetofNodebots) on 9 Mar 2015 - [tag](https://github.com/mimming/internet-of-nodebots/releases/tag/2015-03-09-wearables-techcon)
 
 ## About the deck
 

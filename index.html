@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
 
-  <title>The Internet of Nodebots</title>
+  <title>Firebase</title>
 
-  <meta name="description" content="Because who doesn't love JavaScript powered little robotic friends">
+  <meta name="description" content="Firebase + Johnny-Five + Raspberry Pi = IoT Prototyping fun">
   <meta name="author" content="Jenny Tong">
 
   <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -30,19 +30,24 @@
       document.getElementsByTagName('head')[0].appendChild(link);
     }
   </script>
-  <script>
-    var currentSlide = 0;
-    
-  </script>
 
-  <script src="https://cdn.firebase.com/js/client/2.1.2/firebase.js"></script>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6U2ExB8yLDc7RiGPYK3C3yIzDPpyFJE0&sensor=false"></script>
+  <script src="https://cdn.firebase.com/libs/geofire/3.0.2/geofire.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.1.1/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/transit.js"></script>
   <script src="js/jQuery.tubeplayer.min.js"></script>
 
   <!--[if lt IE 9]>
   <script src="lib/js/html5shiv.js"></script>
   <![endif]-->
 
+
+  <script>
+    var currentSlide = 0;
+
+  </script>
 
   <style>
     .openlayers-map img {
@@ -94,234 +99,240 @@
 
 <!-- Any section element inside of this container is displayed as a slide -->
 <div class="slides">
-<section class="center">
-  <h1 style="font-size: 2em">The Internet of Nodebots</h1>
-  <br/>
-  <small style="float: right;">Created by Jenny Tong</small>
+<section>
+  <img src="img/firebase-logo.png" style="border:none; box-shadow: none; background: none;">
+  <br/> <br/>
+
+  <h3>Makes IoT Prototyping Fun</h3>
 </section>
 
 <section>
   <div>
-    <img src="img/jenny.jpg" style="border-radius: 150px; float: left; margin-right: 40px; width: 300px;">
-    <br/>
+    <img src="img/jenny.jpg" style="float: left; border-radius: 150px; margin-right: 40px; width: 300px;">
 
-    <div style="width: 600px; float: right;">
+    <div style="float: left; width: 400px;">
       <h3>Jenny Tong</h3>
-      Developer Advocate<br/>
-      <img src="img/firebase-logo.png" style="margin: 10px; height: 60px;"/><br/>
+      Google Cloud Platform
+      Developer Advocate
       <br/>
-      <a href="https://plus.google.com/+mimming">+mimming</a><br/>
-      <a href="https://twitter.com/mimmingcodes">@MimmingCodes</a>
+      <br/>
+      <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a><br/>
     </div>
   </div>
 </section>
 
 <section data-markdown>
   <script type="text/template">
-    ## Questions
-
-    - Have you ever built a robot?
-    - Are robots hard?
-    - Is programming JavaScript hard?
-  </script>
-</section>
-  
-  
-
-<section data-markdown>
-  <script type="text/template">
     ## Agenda
 
-    - What NodeBots have to do with Wearables
-    - What the heck is the Internet of NodeBots?
-    - Anatomy of an Internet aware NodeBot
-    - Build an Internet button
-    - Hack a children's tabletop game
+    - Stuff we don't need
+    - A recipe for IoT hacking
+    - Silly demos
   </script>
 </section>
-  
-  <section data-markdown>
-    <script type="text/template">
-      ### NodeBots and Wearables
 
-      Productive prototyping
-      
-      ![](img/mithril.jpg)
-    </script>
-  </section>
-  
-  <section>
-    <h2>Anatomy of a NodeBot</h2>
+<section>
+  <h3>No low level code</h3>
+  <img src="img/kernel.gif"/>
+</section>
 
+<section>
+  <h3>No complicated circuits</h3>
+  <img src="img/xkcd730.png"/>
+  <p>Credit: <a href="http://xkcd.com/730/">http://xkcd.com/730/</a></p>
+</section>
+
+<section>
+  <h2>The recipe</h2>
     <br/>
-    <img src="img/anatomy.jpg">
-    
-  </section>
+  <table style="margin: 0 auto;">
+    <tr><td style="border: 1px solid white; padding: 10px; min-width: 400px;">Code + Internet</td></tr>
+    <tr><td style="border: 1px solid white; padding: 10px; min-width: 400px;">Drivers</td></tr>
+    <tr><td style="border: 1px solid white; padding: 10px; min-width: 400px;" >Hardware</td></tr>
+  </table>
+</section>
 
-  <section>
-    <h2>Typical NodeBot Electronics</h2>
+<section>
+  <h2>The recipe</h2>
+  <br/>
+  <table style="margin: 0 auto;">
+    <tr><td style="border: 1px solid white; padding: 10px;  min-width: 400px; vertical-align: top;" ><img src="img/firebase-icon.png" style="height: 100px; margin: 0 20px;"> Firebase </td></tr>
+    <tr><td style="border: 1px solid white; padding: 10px;  min-width: 400px; vertical-align: top;" ><img src="img/johnny-five.png" style="height: 100px; margin: 0; margin-right: 20px;"> Johnny-Five</td></tr>
+    <tr><td style="border: 1px solid white; padding: 10px;  min-width: 400px; vertical-align: top;" ><img src="img/rpi-logo.png" style="height: 100px; margin: 0;"> Raspberry Pi</td></tr>
+  </table>
+</section>
 
-    <img src="img/uno-kit.jpg">
-    <small>Photo credit arduino.cc</small>
-  </section>
+<section>
+  <h2>Hardware</h2>
+  <img src="img/adafruit-pi-kit.jpg" style="max-height: 500px">
+  <p>From: <a href="http://www.adafruit.com/products/1014">adafruit.com/products/1014</a></p>
+</section>
+
+<section>
+  <h2>Wire stuff up</h2>
+  <img src="img/rpi-led-blink.png" style="max-height: 500px">
+</section>
+
+<section>
+  Hardware done. <br/>
+  <br/>
+  <div class="fragment">
+    Next up: Johnny Five<br/>
+    <img src="img/johnny-five.png" style="max-height: 200px;">
+  </div>
+</section>
+
+<section>
+  <h2>Johnny-Five</h2>
+Install Johnny-Five
+<pre><code data-trim>
+$ npm install johnny-five
+$ npm install raspi-io
+</code></pre>
+<div class="fragment">
+Paste in some code<br/>
+<pre><code data-trim>
+var raspi = require('raspi-io');
+var five = require('johnny-five');
   
-  <section>
-    <h2>Typical NodeBot Electronics</h2>
+var board = new five.Board({ io: new raspi() });
 
-    <img src="img/uno-kit-2.jpg">
-    <small>Photo credit arduino.cc</small>
-  </section>
-
-  <section>
-    <h2>Microcontrollers</h2>
-
-    <img src="img/uno.jpg" style="width: 200px;">
-    <img src="img/lilypad.jpg" style="width: 200px; margin: 40px;" title="Photo credit arduino.cc">
-  </section>
-
-<section>
-  <h2>Tiny Computers</h2>
-  <img src="img/pi.jpg" style="width: 200px;">
-  <img src="img/yun.jpg" style="width: 200px; margin: 40px;" title="Photo credit arduino.cc">
-  <img src="img/edison.jpg" style="width: 300px;">
-</section>
-
-  <section data-markdown>
-    <script type="text/template">
-      ## The Cloud
-
-      - One of many wireless options: ZigBee, Z-Wave, Bluetooth...
-      - We could even us a wire!
-          
-      <br/>
-      ## Because <!-- .element: class="fragment"  data-fragment-index="1"-->
-          
-      - It's already there <!-- .element: class="fragment"  data-fragment-index="1"-->
-      - From anywhere, to anywhere <!-- .element: class="fragment"  data-fragment-index="1"-->
-      - Abstracts away complexity <!-- .element: class="fragment"  data-fragment-index="1"-->
-    </script>
-  </section>
-
-  <section data-markdown>
-    <script type="text/template">
-      ## Let's build something!
-      
-      How about an Internet button?
-    </script>
-  </section>
-
-  <section data-markdown>
-    <script type="text/template">
-      ## Robot build checklist
-
-      - Arduino Uno has Firmata <!-- .element: class="fragment" -->
-      - Button & LED circuit built <!-- .element: class="fragment" -->
-      - Raspberry Pi has node.js, Johnny-Five, and Firebase <!-- .element: class="fragment" -->
-      - Code! <!-- .element: class="fragment" -->
-         - Read the button state
-         - Write to a demo Firebase
-         - Read it back out, light up an LED
-    </script>
-  </section>
-
-  <section>
-    <h2>Now what?</h2>
-    <div style="margin: 0 auto; width: 500px;" id='player'></div>
-    <script>
-      $(document).ready(function () {
-        $('#player').tubeplayer({
-          initialVideo: "dQw4w9WgXcQ" // A very special video
-        });
-
-        // Create the video player
-        var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
-        ref.on("value", function (snapshot) {
-
-          var buttonValue = snapshot.val();
-          if (buttonValue && currentSlide == 8) {
-            $('#player').tubeplayer("seek","0:00");
-            $('#player').tubeplayer("play");
-            console.log("playing!");
-          }
-        });
-      });
-    </script>
-  </section>
-
-<section>
-  <h2>Electronics</h2>
-  <img src="img/button-led.jpg">
-</section>
-<section>
-  <h2>JavaScript</h2>
-  <pre><code>board.on("ready", function () {
-  var button = new five.Button(8);
-
-  button.on("down", function () { ref.set("true"); });
-
-  button.on("up", function () { ref.set("false"); });
-
-  var led = five.Led(13);
-  ref.on("value", function(snap) {
-    if(snap.val() == "true") {
-      led.on();
-      setTimeout(function() { led.off(); }, 500);
-    } 
-  });
+board.on('ready', function() {
+  var led = new five.Led("P1-7");
+  led.blink(500);
 });
-  </code></pre>
-  
+</code></pre>
+  </div>
+  <p class="fragment">From <a href="http://github.com/bryan-m-hughes/raspi-io/">github.com/bryan-m-hughes/raspi-io/</a></p>
 </section>
 
-  <section>
-    <h2>Video Playing Code</h2>
-    <pre><code>// Connect to a demo Firebase
-var ref =  new Firebase("https://firebutton.firebaseio-demo.com");
-      
-ref.child("button").on("value", function (snapshot) {
-  // Read the value
-  var buttonValue = snapshot.val();
-  // If it's true, play the video
-  if (buttonValue) {
-    $('#player').tubeplayer({
-      initialVideo: "dQw4w9WgXcQ"
-    });
-    $('#player').tubeplayer("play");
-  }
-});</code></pre>
-  </section>
+<section>
+  Hardware done. <br/>
+  Driver done.<br/>
+  <br/>
+  <div class="fragment">
+    Next up:<br/>
+    <img src="img/firebase-logo.png" style="max-height: 80px;">
+  </div>
+</section>
 
-  <section data-markdown>
-    <script type="text/template">
-      ## Hacking children's tabletop games
-    </script>
-  </section>
+<section>
+  <h3>Firebase Platform</h3>
+  <br/>
 
-  <section data-markdown>
-    <script type="text/template">
-      ## What we talked about
+  <div style="float: left; margin: 0 20px;">
+    <img src="img/database.png" style="height: 150px;"/><br/><b>Realtime Data</b>
+  </div>
+  <div style="float: left; margin: 0 20px;">
+    <img src="img/userMan.png" style="height: 150px;"/><br/><b>Authentication</b>
+  </div>
+  <div style="float: left; margin: 0 20px;">
+    <img src="img/hosting.png" style="height: 150px;"/><br/><b>Hosting</b>
+  </div>
+  <div style="clear: both;"></div>
+</section>
 
-      - NodeBots, what are they?
-      - The anatomy of a NodeBot
-      - Built one. It rickrolled us. :(
-      - Built another. It was really bad at Hungry Hungry Hippos.
-    </script>
-  </section>
+<section>
+  <h3>Firebase Realtime Database</h3>
+  <br/>
 
-  <section>
-  <h1>The End</h1>
-  <ul>
-    <li>Slides: <a
-        href="https://mimming.com/presos/internet-of-nodebots">mimming.com/presos/internet-of-nodebots</a>
-    </li>
-    <li>FireButton source: <a href="https://github.com/mimming/firebutton">github.com/mimming/firebutton</a></li>
-    <li>Johnny-Five: <a href="https://github.com/rwaldron/johnny-five">github.com/rwaldron/johnny-five</a></li>
+  <img src="img/database.png" style="height: 300px;"/><br/><b>Realtime Database</b>
+</section>
 
-  </ul>
+<section>
+  <h2>Realtime is</h2>
+
+  <h3>Where your bus is</h3>
+
+  <div id="map-canvas" style="width: 100%; height: 600px"></div>
+</section>
+
+<section>
+  <h2>Realtime data is</h2>
+
+  <h3>Game state</h3>
+  <br/>
+
+  <iframe style="background-color: #fff; overflow: hidden;"
+          src="./asteroids" width="800" height="455" scrolling="no"></iframe>
+
+  <br/><a href="http://tinyurl.com/YayAsteroids">http://tinyurl.com/YayAsteroids</a>
+</section>
+
+<section>
+  <h2>Some JavaScript code</h2>
+  <br/>
+
+  <div class="fragment">
+    <h4>Write Data</h4>
+<pre style="margin-bottom:-50px;"><code data-trim>
+var ref = new Firebase("https://io.firebaseio-demo.com/");
+
+ref.set("Hello, Developers!");
+</code></pre>
+  </div>
   <br/><br/>
-  <span class="fragment">Questions anyone?</span>
+
+  <div class="fragment">
+    <h4>Read Data</h4>
+<pre><code data-trim>
+ref.on("value", function (snapshot) {
+  var data = snapshot.val();
+  console.log(data);
+});
+</code></pre>
+  </div>
 </section>
 
+<section>
+  <h2>Put it all together</h2>
+  <br/>
+<pre><code data-trim>
+var board = new five.Board({ io: new raspi() });
+var firebase = 
+  new Firebase("https://ioext.firebaseio.com/button");
+
+board.on("ready", function() {
+  var led = new five.Led("P1-7");
+  var button = new five.Button("P1-13");
+
+  button.on("down", function () { firebase.set(true); });
+  button.on("up", function () { firebase.set(false); });
+
+  firebase.on("value", function(snap) {
+    if(snap.val()) { led.on();
+    } else { led.off(); }
+};});</code></pre>
+
+</section>
+
+<section>
+  <h2>Demos</h2>
+  <div style="margin: 0 auto; width: 500px;" id='player'></div>
+  <script>
+    $(document).ready(function () {
+      // Create the video player
+      var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
+      ref.on("value", function (snapshot) {        
+        var buttonValue = snapshot.val();
+        if (buttonValue && currentSlide == 18) {
+          $('#player').tubeplayer({
+            initialVideo: "dQw4w9WgXcQ",
+            autoPlay: true
+          });
+          console.log("playing!");
+        }
+      });
+    });
+  </script>
+</section>
+
+<section>
+  <h2>Now go build cool stuff</h2>
+  Slides: <a href="https://mimming.com/presos/internet-of-nodebots">mimming.com/presos/internet-of-nodebots</a><br/>
+  Code: <a href="https://github.com/mimming/internet-of-nodebots">github.com/mimming/internet-of-nodebots</a><br/><br/>
+  Me: <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a>
+</section>
 
 </div>
 
@@ -368,6 +379,13 @@ ref.child("button").on("value", function (snapshot) {
         return !!document.body.classList;
       } }
     ]
+  });
+
+  // Update to display map on map-canvas when that slide loads
+  Reveal.addEventListener('slidechanged', function (event) {
+    if (event.indexh === 14) {
+      transitmapstart()
+    }
   });
 
   // Update to display map on map-canvas when that slide loads

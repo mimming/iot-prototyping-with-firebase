@@ -163,14 +163,29 @@
 </section>
 
 <section>
-  <h2>Hardware</h2>
+  <h2>Hardware: Raspberry Pi</h2>
   <img src="img/adafruit-pi-kit.jpg" style="max-height: 500px">
   <p>From: <a href="http://www.adafruit.com/products/1014">adafruit.com/products/1014</a></p>
 </section>
 
 <section>
+  <h2>Hardware: Arduino Uno</h2>
+  <img src="img/Arduino316.jpg" style="max-height: 500px">
+</section>
+
+<section>
+  <h2>Hardware Prep: Flash Firmata</h2>
+  <img src="img/flash-firmata.gif" style="max-height: 500px">
+</section>
+
+<section>
   <h2>Wire stuff up</h2>
-  <img src="img/rpi-led-blink.png" style="max-height: 500px">
+  <img src="img/l5-led.png" style="max-height: 500px">
+</section>
+
+<section>
+  <h2>Wire stuff up</h2>
+  <img src="img/j5-button.png" style="max-height: 500px">
 </section>
 
 <section>
@@ -187,24 +202,48 @@
 Install Johnny-Five
 <pre><code data-trim>
 $ npm install johnny-five
-$ npm install raspi-io
 </code></pre>
 <div class="fragment">
 Paste in some code<br/>
 <pre><code data-trim>
-var raspi = require('raspi-io');
 var five = require('johnny-five');
   
-var board = new five.Board({ io: new raspi() });
+var board = new five.Board();
 
 board.on('ready', function() {
-  var led = new five.Led("P1-7");
-  led.blink(500);
+  var led = new five.Led("13");
+  led.on();
 });
 </code></pre>
   </div>
-  <p class="fragment">From <a href="http://github.com/bryan-m-hughes/raspi-io/">github.com/bryan-m-hughes/raspi-io/</a></p>
+  <p class="fragment">From <a href="https://github.com/rwaldron/johnny-five/">https://github.com/rwaldron/johnny-five/</a></p>
 </section>
+
+  <section>
+    <h2>Johnny-Five</h2>
+
+    Add button code<br/>
+<pre><code data-trim>
+var five = require('johnny-five');
+
+var board = new five.Board();
+
+board.on('ready', function() {
+  var led = new five.Led("13");
+  var button = new five.Button("8");
+
+  button.on("up", function () {
+    led.off();
+  });
+
+  button.on("down", function () {
+    led.on();
+  });
+});
+</code></pre>
+    <p class="fragment">From <a href="https://github.com/rwaldron/johnny-five/">https://github.com/rwaldron/johnny-five/</a></p>
+
+  </section>
 
 <section>
   Hardware done. <br/>
@@ -240,29 +279,30 @@ board.on('ready', function() {
 </section>
 
 <section>
-  <h2>Realtime is</h2>
+  <h3>Realtime is where your bus is</h3>
+  <a href="https://wherebus.firebaseapp.com">https://wherebus.firebaseapp.com</a>
+  <br/>
+  <br/>
 
-  <h3>Where your bus is</h3>
-
-  <div id="map-canvas" style="width: 100%; height: 600px"></div>
+  <iframe src="https://wherebus.firebaseapp.com/" style="width: 100%; max-height: 100%; height: 600px"></iframe>
 </section>
 
 <section>
-  <h2>Realtime is</h2>
 
-  <h3>Collaborative drawing</h3>
+  <h3>Realtime is collaborative drawing</h3>
+  <a href="https://yaay.firebaseapp.com">https://yaay.firebaseapp.com</a>
+  <br/>
+  <br/>
 
-  <iframe style="background-color: #fff; overflow: hidden;" scrolling="no"
-          src="https://yaay.firebaseapp.com/#-JsZFzbs0dbYGQkxA_yh" width="800" height="400"></iframe>
+  <iframe scrolling="no" src="https://yaay.firebaseapp.com/#default"
+          style="background-color: #fff; overflow: hidden; width: 800px; height: 400px"></iframe>
 
-  <br/><a href="http://tinyurl.com/DrawYay">http://tinyurl.com/DrawYay</a>
 </section>
 
 
 <section>
   <h2>Realtime game state</h2>
-  <iframe style=" margin-top: -50px; background-color: #fff; overflow: hidden; -webkit-transform: scale(0.7); "
-          src="https://mmoasteroids.firebaseapp.com" width="1300" height="600" scrolling="no"></iframe>
+  <img src="img/mmo-asteroids.gif">
 
   <br/><a href="http://mmoasteroids.firebaseapp.com">http://mmoasteroids.firebaseapp.com</a>
 </section>
@@ -296,21 +336,24 @@ ref.on("value", function (snapshot) {
   <h2>Put it all together</h2>
   <br/>
 <pre><code data-trim>
-var board = new five.Board({ io: new raspi() });
-var firebase = 
-  new Firebase("https://ioext.firebaseio.com/button");
+var five = require('johnny-five');
+var Firebase = require("firebase");
+var board = new five.Board();
+var firebaseRef = new Firebase("https://firebutton.firebaseio-demo.com/button");
 
-board.on("ready", function() {
-  var led = new five.Led("P1-7");
-  var button = new five.Button("P1-13");
+board.on("ready", function () {
+  var button = new five.Button(8);
+  var led = new five.Led(13);
+  button.on("up", function () { firebaseRef.set(false); });
+  button.on("down", function () { firebaseRef.set(true); });
 
-  button.on("down", function () { firebase.set(true); });
-  button.on("up", function () { firebase.set(false); });
-
-  firebase.on("value", function(snap) {
-    if(snap.val()) { led.on();
-    } else { led.off(); }
-};});</code></pre>
+  firebaseRef.on("value", function (snapshot) {
+    var buttonValue = snapshot.val();
+    if (buttonValue) {
+      led.on();
+      setTimeout(function() { led.off(); }, 2500); }
+});});
+</code></pre>
 
 </section>
 
@@ -323,7 +366,7 @@ board.on("ready", function() {
       var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
       ref.on("value", function (snapshot) {        
         var buttonValue = snapshot.val();
-        if (buttonValue && currentSlide == 18) {
+        if (buttonValue && currentSlide == 23) {
           $('#player').tubeplayer({
             initialVideo: "dQw4w9WgXcQ",
             autoPlay: true
@@ -338,7 +381,9 @@ board.on("ready", function() {
 <section>
   <h2>Now go build cool stuff</h2>
   Slides: <a href="https://mimming.com/presos/internet-of-nodebots">mimming.com/presos/internet-of-nodebots</a><br/>
-  Code: <a href="https://github.com/mimming/internet-of-nodebots">github.com/mimming/internet-of-nodebots</a><br/><br/>
+  Slide code: <a href="https://github.com/mimming/internet-of-nodebots">github.com/mimming/internet-of-nodebots</a><br/><br/>
+  FireButton Code:  <a href="https://github.com/mimming/firebutton">github.com/mimming/firebutton</a><br/><br/>
+  <br/>
   Me: <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a>
 </section>
 
@@ -389,14 +434,6 @@ board.on("ready", function() {
     ]
   });
 
-  // Update to display map on map-canvas when that slide loads
-  Reveal.addEventListener('slidechanged', function (event) {
-    if (event.indexh === 14) {
-      transitmapstart()
-    }
-  });
-
-  // Update to display map on map-canvas when that slide loads
   Reveal.addEventListener('slidechanged', function (event) {
     currentSlide = event.indexh;
   });

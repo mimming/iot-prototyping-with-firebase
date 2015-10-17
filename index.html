@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Firebase</title>
+  <title>IoT Prototyping with Firebase</title>
 
   <meta name="description" content="Firebase + Johnny-Five + Raspberry Pi = IoT Prototyping fun">
   <meta name="author" content="Jenny Tong">
@@ -36,7 +36,6 @@
   <script src="https://cdn.firebase.com/libs/geofire/3.0.2/geofire.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.1.1/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="js/transit.js"></script>
   <script src="js/jQuery.tubeplayer.min.js"></script>
 
   <!--[if lt IE 9]>
@@ -46,7 +45,6 @@
 
   <script>
     var currentSlide = 0;
-
   </script>
 
   <style>
@@ -100,265 +98,173 @@
 <!-- Any section element inside of this container is displayed as a slide -->
 <div class="slides">
 <section>
-  <img src="img/firebase-logo.png" style="border:none; box-shadow: none; background: none;">
-  <br/> <br/>
+  <img src="img/devfest-frenso-intro.png">
+</section>
 
-  <h3>Makes IoT Prototyping Fun</h3>
+<section>
+  <img src="img/devfest-fresno-logos.png">
 </section>
 
 <section>
   <div>
     <img src="img/jenny.jpg" style="float: left; border-radius: 150px; margin-right: 40px; width: 300px;">
 
-    <div style="float: left; width: 400px;">
+    <div style="float: left; width: 400px; text-align: left;">
       <h3>Jenny Tong</h3>
       Google Cloud Platform
       Developer Advocate
       <br/>
       <br/>
       <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a><br/>
+      <a href="http://google.com/+mimming">google.com/+mimming</a><br/>
     </div>
   </div>
 </section>
 
+<section>
+  <h2>How many of you...</h2>
+  <ul>
+    <li class="fragment">Are EEs?</li>
+    <li class="fragment">Know JavaScript better than C?</li>
+    <li class="fragment">Own a dusty Arduino or Raspberry Pi?</li>
+  </ul>
+</section>
+
 <section data-markdown>
   <script type="text/template">
-    ## Agenda
+## The Plan
 
-    - Stuff we don't need
-    - A recipe for IoT hacking
-    - Silly demos
+- EE for Web Devs
+- Recipe for IoT
+- Live build & code
+- Silly demos
   </script>
 </section>
 
-<section>
-  <h3>No low level code</h3>
-  <img src="img/kernel.gif"/>
-</section>
+  <section>
+    <h2>Bits & Volts</h2>
+    <div>
+      <h3>0 Bit</h3>
+      <img style="height: 200px" src="img/digital-low.png">
+    </div>
+    <div class="fragment">
+      <h3>1 Bit</h3>
+      <img style="height: 200px" src="img/digital-high.png">
+    </div>
+  </section>
 
-<section>
-  <h3>No complicated circuits</h3>
-  <img src="img/xkcd730.png"/>
-  <p>Credit: <a href="http://xkcd.com/730/">http://xkcd.com/730/</a></p>
-</section>
+  <section>
+    <div>
+      <h3>Analog</h3>
+      <img style="height: 200px" src="img/analog.png">
+    </div>
+    <div class="fragment">
+      <h3>PWM</h3>
+      <img style="height: 200px" src="img/pwm.png">
+    </div>
+  </section>
 
-<section>
-  <h2>The recipe</h2>
+  <section>
+    <h2>Components</h2>
+    Kind of like Legos... But, sometimes they dance, sometimes they catch fire
+  </section>
+
+  <section>
+    <h2>The Recipe</h2>
     <br/>
-  <table style="margin: 0 auto;">
-    <tr><td style="border: 1px solid white; padding: 10px; min-width: 400px;">Code + Internet</td></tr>
-    <tr><td style="border: 1px solid white; padding: 10px; min-width: 400px;">Drivers</td></tr>
-    <tr><td style="border: 1px solid white; padding: 10px; min-width: 400px;" >Hardware</td></tr>
-  </table>
-</section>
-
-<section>
-  <h2>The recipe</h2>
-  <br/>
-  <table style="margin: 0 auto;">
-    <tr><td style="border: 1px solid white; padding: 10px;  min-width: 400px; vertical-align: top;" ><img src="img/firebase-icon.png" style="height: 100px; margin: 0 20px;"> Firebase </td></tr>
-    <tr><td style="border: 1px solid white; padding: 10px;  min-width: 400px; vertical-align: top;" ><img src="img/johnny-five.png" style="height: 100px; margin: 0; margin-right: 20px;"> Johnny-Five</td></tr>
-    <tr><td style="border: 1px solid white; padding: 10px;  min-width: 400px; vertical-align: top;" ><img src="img/rpi-logo.png" style="height: 100px; margin: 0;"> Raspberry Pi</td></tr>
-  </table>
-</section>
-
-<section>
-  <h2>Hardware: Raspberry Pi</h2>
-  <img src="img/adafruit-pi-kit.jpg" style="max-height: 500px">
-  <p>From: <a href="http://www.adafruit.com/products/1014">adafruit.com/products/1014</a></p>
-</section>
-
-<section>
-  <h2>Hardware: Arduino Uno</h2>
-  <img src="img/Arduino316.jpg" style="max-height: 500px">
-</section>
-
-<section>
-  <h2>Hardware Prep: Flash Firmata</h2>
-  <img src="img/flash-firmata.gif" style="max-height: 500px">
-</section>
-
-<section>
-  <h2>Wire stuff up</h2>
-  <img src="img/l5-led.png" style="max-height: 500px">
-</section>
-
-<section>
-  <h2>Wire stuff up</h2>
-  <img src="img/j5-button.png" style="max-height: 500px">
-</section>
-
-<section>
-  Hardware done. <br/>
-  <br/>
-  <div class="fragment">
-    Next up: Johnny Five<br/>
-    <img src="img/johnny-five.png" style="max-height: 200px;">
-  </div>
-</section>
-
-<section>
-  <h2>Johnny-Five</h2>
-Install Johnny-Five
-<pre><code data-trim>
-$ npm install johnny-five
-</code></pre>
-<div class="fragment">
-Paste in some code<br/>
-<pre><code data-trim>
-var five = require('johnny-five');
-  
-var board = new five.Board();
-
-board.on('ready', function() {
-  var led = new five.Led("13");
-  led.on();
-});
-</code></pre>
-  </div>
-  <p class="fragment">From <a href="https://github.com/rwaldron/johnny-five/">https://github.com/rwaldron/johnny-five/</a></p>
-</section>
+    <div style="height: 60px;" class="fragment">Cool stuff (components)</div>
+    <div style="height: 60px;" class="fragment"><img src="img/uno.jpg" style="height: 50px; margin-bottom: -10px"> &nbsp;&nbsp;Arduino Uno</div>
+    <div style="height: 60px;" class="fragment"><img src="img/johnny-five.png" style="height: 50px; margin-bottom: -10px"> &nbsp;&nbsp;Johnny-Five</div>
+    <div style="height: 60px;" class="fragment"><img src="img/rpi-logo.png" style="height: 50px; margin-bottom: -10px"> &nbsp;&nbsp;Raspberry Pi (or laptop)</div>
+    <div style="height: 60px;" class="fragment"><img src="img/firebase-icon.png" style="height: 50px; margin-bottom: -10px"> &nbsp;&nbsp;Firebase</div>
+  </section>
 
   <section>
     <h2>Johnny-Five</h2>
+    <a href="https://github.com/rwaldron/johnny-five/"><img src="img/johnny-five.png"></a>
+  </section>
 
-    Add button code<br/>
-<pre><code data-trim>
-var five = require('johnny-five');
+  <section>
+    <h3>Firebase</h3>
+    <div>Goodies to make app dev easier</div>
+    <br/>
 
-var board = new five.Board();
+    <div class="fragment">
+    <div style="float: left; margin: 0 20px;">
+      <img src="img/database.png" style="height: 150px;"/><br/><b>Realtime Data</b>
+    </div>
+    <div style="float: left; margin: 0 20px;">
+      <img src="img/userMan.png" style="height: 150px;"/><br/><b>Authentication</b>
+    </div>
+    <div style="float: left; margin: 0 20px;">
+      <img src="img/hosting.png" style="height: 150px;"/><br/><b>Hosting</b>
+    </div>
+    <div style="clear: both;"></div>
+    </div>
+  </section>
 
-board.on('ready', function() {
-  var led = new five.Led("13");
-  var button = new five.Button("8");
+  <section>
+    <h3>Firebase Realtime Database</h3>
+    <br/>
 
-  button.on("up", function () {
-    led.off();
-  });
+    <img src="img/database.png" style="height: 300px;"/>
+  </section>
 
-  button.on("down", function () {
-    led.on();
-  });
-});
-</code></pre>
-    <p class="fragment">From <a href="https://github.com/rwaldron/johnny-five/">https://github.com/rwaldron/johnny-five/</a></p>
+  <section>
+    <h3>Realtime is where your bus is</h3>
+    <a href="https://wherebus.firebaseapp.com">https://wherebus.firebaseapp.com</a>
+    <br/>
+    <br/>
+
+    <iframe src="https://wherebus.firebaseapp.com/" style="width: 100%; max-height: 100%; height: 600px"></iframe>
+  </section>
+
+  <section>
+
+    <h3>Realtime is collaborative drawing</h3>
+    <a href="https://firesketch.firebaseapp.com">https://firesketch.firebaseapp.com</a>
+
+
+    <iframe scrolling="no" src="https://firesketch.firebaseapp.com/#default"
+            style="background-color: #fff; overflow: hidden; width: 1200px; height: 700px; -webkit-transform: scale(0.75);
+"></iframe>
 
   </section>
 
-<section>
-  Hardware done. <br/>
-  Driver done.<br/>
-  <br/>
-  <div class="fragment">
-    Next up:<br/>
-    <img src="img/firebase-logo.png" style="max-height: 80px;">
-  </div>
-</section>
 
-<section>
-  <h3>Firebase Platform</h3>
-  <br/>
+  <section>
+    <h2>Some JavaScript code</h2>
+    <br/>
 
-  <div style="float: left; margin: 0 20px;">
-    <img src="img/database.png" style="height: 150px;"/><br/><b>Realtime Data</b>
-  </div>
-  <div style="float: left; margin: 0 20px;">
-    <img src="img/userMan.png" style="height: 150px;"/><br/><b>Authentication</b>
-  </div>
-  <div style="float: left; margin: 0 20px;">
-    <img src="img/hosting.png" style="height: 150px;"/><br/><b>Hosting</b>
-  </div>
-  <div style="clear: both;"></div>
-</section>
-
-<section>
-  <h3>Firebase Realtime Database</h3>
-  <br/>
-
-  <img src="img/database.png" style="height: 300px;"/><br/><b>Realtime Database</b>
-</section>
-
-<section>
-  <h3>Realtime is where your bus is</h3>
-  <a href="https://wherebus.firebaseapp.com">https://wherebus.firebaseapp.com</a>
-  <br/>
-  <br/>
-
-  <iframe src="https://wherebus.firebaseapp.com/" style="width: 100%; max-height: 100%; height: 600px"></iframe>
-</section>
-
-<section>
-
-  <h3>Realtime is collaborative drawing</h3>
-  <a href="https://yaay.firebaseapp.com">https://yaay.firebaseapp.com</a>
-  <br/>
-  <br/>
-
-  <iframe scrolling="no" src="https://yaay.firebaseapp.com/#default"
-          style="background-color: #fff; overflow: hidden; width: 800px; height: 400px"></iframe>
-
-</section>
-
-
-<section>
-  <h2>Realtime game state</h2>
-  <img src="img/mmo-asteroids.gif">
-
-  <br/><a href="http://mmoasteroids.firebaseapp.com">http://mmoasteroids.firebaseapp.com</a>
-</section>
-
-<section>
-  <h2>Some JavaScript code</h2>
-  <br/>
-
-  <div class="fragment">
-    <h4>Write Data</h4>
+    <div class="fragment">
+      <h4>Write Data</h4>
 <pre style="margin-bottom:-50px;"><code data-trim>
 var ref = new Firebase("https://io.firebaseio-demo.com/");
 
 ref.set("Hello, Developers!");
 </code></pre>
-  </div>
-  <br/><br/>
+    </div>
+    <br/><br/>
 
-  <div class="fragment">
-    <h4>Read Data</h4>
+    <div class="fragment">
+      <h4>Read Data</h4>
 <pre><code data-trim>
 ref.on("value", function (snapshot) {
   var data = snapshot.val();
   console.log(data);
 });
 </code></pre>
-  </div>
+    </div>
+  </section>
+
+<section>
+  <h2>Time to build something</h2>
+  <br/><br/>
+  <div class="fragment">The "Hello, World" of electronics: an LED Button</div>
 </section>
 
 <section>
-  <h2>Put it all together</h2>
-  <br/>
-<pre><code data-trim>
-var five = require('johnny-five');
-var Firebase = require("firebase");
-var board = new five.Board();
-var firebaseRef = new Firebase("https://firebutton.firebaseio-demo.com/button");
-
-board.on("ready", function () {
-  var button = new five.Button(8);
-  var led = new five.Led(13);
-  button.on("up", function () { firebaseRef.set(false); });
-  button.on("down", function () { firebaseRef.set(true); });
-
-  firebaseRef.on("value", function (snapshot) {
-    var buttonValue = snapshot.val();
-    if (buttonValue) {
-      led.on();
-      setTimeout(function() { led.off(); }, 2500); }
-});});
-</code></pre>
-
-</section>
-
-<section>
-  <h2>Demos</h2>
+  <h2>Silly Demos</h2>
   <div style="margin: 0 auto; width: 500px;" id='player'></div>
   <script>
     $(document).ready(function () {
@@ -366,7 +272,7 @@ board.on("ready", function () {
       var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
       ref.on("value", function (snapshot) {        
         var buttonValue = snapshot.val();
-        if (buttonValue && currentSlide == 23) {
+        if (buttonValue && currentSlide == 16) {
           $('#player').tubeplayer({
             initialVideo: "dQw4w9WgXcQ",
             autoPlay: true
@@ -377,14 +283,24 @@ board.on("ready", function () {
     });
   </script>
 </section>
+<section>
+  <h2>Parting Words</h2>
+  <ul>
+    <li class="fragment">Isn't that easy?</li>
+    <li class="fragment">Let projects guide your hacking</li>
+    <li class="fragment">Experiment!</li>
+    <li class="fragment">Celebrate the first thing you burn up</li>
+  </ul>
+</section>
 
 <section>
-  <h2>Now go build cool stuff</h2>
+  <h2>Now go build cool stuff</h2><br/>
   Slides: <a href="https://mimming.com/presos/internet-of-nodebots">mimming.com/presos/internet-of-nodebots</a><br/>
-  Slide code: <a href="https://github.com/mimming/internet-of-nodebots">github.com/mimming/internet-of-nodebots</a><br/><br/>
-  FireButton Code:  <a href="https://github.com/mimming/firebutton">github.com/mimming/firebutton</a><br/><br/>
+  The code:  <a href="https://github.com/mimming/snippets">github.com/mimming/snippets</a><br/><br/>
   <br/>
-  Me: <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a>
+  Me: <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a><br/>
+  <br/>
+  <div class="fragment">Event survey: <a href="http://bit.ly/1Ql3Rjy">bit.ly/1Ql3Rjy</a></div>
 </section>
 
 </div>

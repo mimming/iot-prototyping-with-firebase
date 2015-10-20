@@ -269,7 +269,7 @@ ref.on("value", function (snapshot) {
       var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
       ref.on("value", function (snapshot) {        
         var buttonValue = snapshot.val();
-        if (buttonValue && currentSlide == 15) {
+        if (buttonValue == "down" && currentSlide == 15) {
           $('#player').tubeplayer({
             initialVideo: "dQw4w9WgXcQ",
             autoPlay: true

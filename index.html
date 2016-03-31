@@ -268,7 +268,7 @@ ref.on("value", function (snapshot) {
   <script>
     $(document).ready(function () {
       // Create the video player
-      var ref = new Firebase("https://espbutton.firebaseio-demo.com/button");
+      var ref = new Firebase("https://espbutton.firebaseio.com/button");
       ref.on("value", function (snapshot) {        
         var buttonValue = snapshot.val();
         if (buttonValue == "down" && currentSlide == 15) {

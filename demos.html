@@ -97,120 +97,6 @@
 
 <!-- Any section element inside of this container is displayed as a slide -->
 <div class="slides">
-<section>
-  <img src="img/logo_firebase_with_text.png" style="border:none; box-shadow: none; background: none;">
-  <br/> <br/>
-
-  <h3>Makes IoT Prototyping Fun</h3>
-</section>
-
-<section>
-  <div>
-    <img src="img/jen-headshot.jpg" style="float: left; border-radius: 150px; margin-right: 40px; width: 300px;">
-
-    <div style="float: left; width: 400px; text-align: left;">
-      <h3>Jenny Tong</h3>
-      Google Cloud Platform
-      Developer Advocate
-      <br/>
-      <br/>
-      <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a><br/>
-      <a href="https://mimming.com">mimming.com</a><br/>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>How many of you...</h2>
-  <ul>
-    <li class="fragment">Are EEs?</li>
-    <li class="fragment">Know JavaScript better than C?</li>
-    <li class="fragment">Own a dusty Arduino or Raspberry Pi?</li>
-  </ul>
-</section>
-
-<section data-markdown>
-  <script type="text/template">
-## The Plan
-
-- EE for Web Devs
-- Recipe for IoT
-- Live build & code
-- Silly demos
-  </script>
-</section>
-
-  <section>
-    <h2>Bits & Volts</h2>
-    <div>
-      <h3>0 Bit</h3>
-      <img style="height: 200px" src="img/digital-low-transparent.png">
-    </div>
-    <div class="fragment">
-      <h3>1 Bit</h3>
-      <img style="height: 200px" src="img/digitial-high-transparent.png">
-    </div>
-  </section>
-
-  <section>
-    <div>
-      <h3>Analog</h3>
-      <img style="height: 200px" src="img/analog-transparent.png">
-    </div>
-    <div class="fragment">
-      <h3>PWM</h3>
-      <img style="height: 200px" src="img/pwm-transparent.png">
-    </div>
-  </section>
-
-  <section>
-    <h2>Components</h2>
-    Kind of like Legos... But, sometimes they dance, sometimes they catch fire
-  </section>
-
-  <section>
-    <h2>The Recipe</h2>
-    <br/>
-    <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/recipe-comp.png"><br/>Components</div>
-    <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/recipe-arduino.png"><br/>Arduino Uno</div>
-    <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/recipe-raspi.png"><br/>Raspberry Pi</div>
-    <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/sgier-johnny-five.png"><br/>Johnny-Five</div>
-    <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/logo_firebase.png"><br/>Firebase</div>
-    <br/><br/>
-    <small>Diagrams made in Fritzing</small>
-  </section>
-
-  <section>
-    <h2>Johnny-Five</h2>
-    <a href="https://github.com/rwaldron/johnny-five/" target="_blank"><img src="img/johnny-five.png"></a>
-  </section>
-
-  <section>
-    <h3>Firebase</h3>
-    <div>Goodies to make app dev easier</div>
-    <br/>
-
-    <div class="fragment">
-    <div style="float: left; margin: 0 20px;">
-      <img src="img/database.png" style="height: 150px;"/><br/><b>Realtime Data</b>
-    </div>
-    <div style="float: left; margin: 0 20px;">
-      <img src="img/userMan.png" style="height: 150px;"/><br/><b>Authentication</b>
-    </div>
-    <div style="float: left; margin: 0 20px;">
-      <img src="img/hosting.png" style="height: 150px;"/><br/><b>Hosting</b>
-    </div>
-    <div style="clear: both;"></div>
-    </div>
-  </section>
-
-  <section>
-    <h3>Firebase Realtime Database</h3>
-    <br/>
-
-    <img src="img/database.png" style="height: 300px;"/>
-  </section>
-
   <section>
     <h3>Realtime is where your bus is</h3>
     <a href="https://wherebus.firebaseapp.com">https://wherebus.firebaseapp.com</a>
@@ -236,32 +122,21 @@
     <br/>
 
     <div class="fragment">
-      <h4>Connect</h4>
-<pre style="margin-bottom:-50px;"><code data-trim>
-firebase.initializeApp({
-  databaseURL: 'https://yay.firebaseio-demo.com/',
-  serviceAccount: "yay-auth-stuff.json"
-});
-var ref = firebase.database().ref("/");
-</code></pre>
-    </div>
-    <br/>
-    <br/>
-
-    <div class="fragment">
       <h4>Write Data</h4>
 <pre style="margin-bottom:-50px;"><code data-trim>
-  ref.set("Hello, Developers!");
+var ref = new Firebase("https://yay.firebaseio-demo.com/");
+
+ref.set("Hello, Developers!");
 </code></pre>
     </div>
-    <br/>
-    <br/>
+    <br/><br/>
 
     <div class="fragment">
       <h4>Read Data</h4>
 <pre><code data-trim>
 ref.on("value", function (snapshot) {
-  console.log(snapshot.val());
+  var data = snapshot.val();
+  console.log(data);
 });
 </code></pre>
     </div>
@@ -279,7 +154,7 @@ ref.on("value", function (snapshot) {
   <script>
     $(document).ready(function () {
       // Create the video player
-      var ref = new Firebase("https://espbutton.firebaseio.com/button");
+      var ref = new Firebase("https://firebutton.firebaseio-demo.com/button");
       ref.on("value", function (snapshot) {        
         var buttonValue = snapshot.val();
         if (buttonValue == "down" && currentSlide == 15) {
@@ -294,34 +169,16 @@ ref.on("value", function (snapshot) {
   </script>
 </section>
 
-<!--<section>-->
-
-  <!--<h3>Another Silly Demo</h3>-->
-  <!--<a href="https://firesketch.firebaseapp.com">https://firesketch.firebaseapp.com</a>-->
-
-
-  <!--<iframe scrolling="no" src="https://firesketch.firebaseapp.com/#default"-->
-          <!--style="background-color: #fff; overflow: hidden; width: 1200px; height: 700px; -webkit-transform: scale(0.75);-->
-<!--"></iframe>-->
-
-<!--</section>-->
-
 <section>
-  <h2>Parting Words</h2>
-  <ul>
-    <li class="fragment">Isn't that easy?</li>
-    <li class="fragment">Let projects guide your hacking</li>
-    <li class="fragment">Experiment!</li>
-    <li class="fragment">Celebrate the first thing you burn up</li>
-  </ul>
-</section>
 
-<section>
-  <h2>Now go build cool stuff</h2><br/>
-  Slides: <a href="https://mimming.com/presos/internet-of-nodebots">mimming.com/presos/internet-of-nodebots</a><br/>
-  The code:  <a href="https://github.com/mimming/snippets">github.com/mimming/snippets</a><br/><br/>
-  <br/>
-  Me: <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a><br/>
+  <h3>Another Silly Demo</h3>
+  <a href="https://firesketch.firebaseapp.com">https://firesketch.firebaseapp.com</a>
+
+
+  <iframe scrolling="no" src="https://firesketch.firebaseapp.com/#default"
+          style="background-color: #fff; overflow: hidden; width: 1200px; height: 700px; -webkit-transform: scale(0.75);
+"></iframe>
+
 </section>
 
 </div>

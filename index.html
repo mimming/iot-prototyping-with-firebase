@@ -98,7 +98,7 @@
 <!-- Any section element inside of this container is displayed as a slide -->
 <div class="slides">
 <section>
-  <img src="img/firebase-logo.png" style="border:none; box-shadow: none; background: none;">
+  <img src="img/logo_firebase_with_text.png" style="border:none; box-shadow: none; background: none;">
   <br/> <br/>
 
   <h3>Makes IoT Prototyping Fun</h3>
@@ -106,7 +106,7 @@
 
 <section>
   <div>
-    <img src="img/jenny.jpg" style="float: left; border-radius: 150px; margin-right: 40px; width: 300px;">
+    <img src="img/jen-headshot.jpg" style="float: left; border-radius: 150px; margin-right: 40px; width: 300px;">
 
     <div style="float: left; width: 400px; text-align: left;">
       <h3>Jenny Tong</h3>
@@ -115,7 +115,7 @@
       <br/>
       <br/>
       <a href="https://twitter.com/MimmingCodes">@MimmingCodes</a><br/>
-      <a href="http://google.com/+mimming">google.com/+mimming</a><br/>
+      <a href="https://mimming.com">mimming.com</a><br/>
     </div>
   </div>
 </section>
@@ -144,22 +144,22 @@
     <h2>Bits & Volts</h2>
     <div>
       <h3>0 Bit</h3>
-      <img style="height: 200px" src="img/digital-low.png">
+      <img style="height: 200px" src="img/digital-low-transparent.png">
     </div>
     <div class="fragment">
       <h3>1 Bit</h3>
-      <img style="height: 200px" src="img/digital-high.png">
+      <img style="height: 200px" src="img/digitial-high-transparent.png">
     </div>
   </section>
 
   <section>
     <div>
       <h3>Analog</h3>
-      <img style="height: 200px" src="img/analog.png">
+      <img style="height: 200px" src="img/analog-transparent.png">
     </div>
     <div class="fragment">
       <h3>PWM</h3>
-      <img style="height: 200px" src="img/pwm.png">
+      <img style="height: 200px" src="img/pwm-transparent.png">
     </div>
   </section>
 
@@ -175,14 +175,14 @@
     <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/recipe-arduino.png"><br/>Arduino Uno</div>
     <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/recipe-raspi.png"><br/>Raspberry Pi</div>
     <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/sgier-johnny-five.png"><br/>Johnny-Five</div>
-    <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/firebase-icon.png"><br/>Firebase</div>
+    <div style="display: inline-block; padding: 0 15px; font-size: 25px;" class="fragment"><img style="max-height: 175px;" src="img/logo_firebase.png"><br/>Firebase</div>
     <br/><br/>
     <small>Diagrams made in Fritzing</small>
   </section>
 
   <section>
     <h2>Johnny-Five</h2>
-    <a href="https://github.com/rwaldron/johnny-five/"><img src="img/johnny-five.png"></a>
+    <a href="https://github.com/rwaldron/johnny-five/" target="_blank"><img src="img/johnny-five.png"></a>
   </section>
 
   <section>
@@ -236,21 +236,32 @@
     <br/>
 
     <div class="fragment">
-      <h4>Write Data</h4>
+      <h4>Connect</h4>
 <pre style="margin-bottom:-50px;"><code data-trim>
-var ref = new Firebase("https://yay.firebaseio-demo.com/");
-
-ref.set("Hello, Developers!");
+firebase.initializeApp({
+  databaseURL: 'https://yay.firebaseio-demo.com/',
+  serviceAccount: "yay-auth-stuff.json"
+});
+var ref = firebase.database().ref("/");
 </code></pre>
     </div>
-    <br/><br/>
+    <br/>
+    <br/>
+
+    <div class="fragment">
+      <h4>Write Data</h4>
+<pre style="margin-bottom:-50px;"><code data-trim>
+  ref.set("Hello, Developers!");
+</code></pre>
+    </div>
+    <br/>
+    <br/>
 
     <div class="fragment">
       <h4>Read Data</h4>
 <pre><code data-trim>
 ref.on("value", function (snapshot) {
-  var data = snapshot.val();
-  console.log(data);
+  console.log(snapshot.val());
 });
 </code></pre>
     </div>
@@ -283,17 +294,17 @@ ref.on("value", function (snapshot) {
   </script>
 </section>
 
-<section>
+<!--<section>-->
 
-  <h3>Another Silly Demo</h3>
-  <a href="https://firesketch.firebaseapp.com">https://firesketch.firebaseapp.com</a>
+  <!--<h3>Another Silly Demo</h3>-->
+  <!--<a href="https://firesketch.firebaseapp.com">https://firesketch.firebaseapp.com</a>-->
 
 
-  <iframe scrolling="no" src="https://firesketch.firebaseapp.com/#default"
-          style="background-color: #fff; overflow: hidden; width: 1200px; height: 700px; -webkit-transform: scale(0.75);
-"></iframe>
+  <!--<iframe scrolling="no" src="https://firesketch.firebaseapp.com/#default"-->
+          <!--style="background-color: #fff; overflow: hidden; width: 1200px; height: 700px; -webkit-transform: scale(0.75);-->
+<!--"></iframe>-->
 
-</section>
+<!--</section>-->
 
 <section>
   <h2>Parting Words</h2>

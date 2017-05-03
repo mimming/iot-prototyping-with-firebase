@@ -6,7 +6,8 @@ Do you know what’s cool? Robots. Do you know what’s cooler than robots? Inte
 
 Jenny will show you how easy it is to combine node.js, commodity hardware, and the Internet of Things to build awesome little robotic friends. This session will include both live coding and live robot building.
 
-Slides live on [mimming.com](https://mimming.com/presos/internet-of-nodebots/)
+- Slides live on [mimming.com](https://mimming.com/presos/internet-of-nodebots/)
+- Code hacked up during demo in [code](./code) folder.
 
 ## About the deck
 

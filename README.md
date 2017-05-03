@@ -6,9 +6,6 @@ Jenny will show you how easy it is to combine node.js, commodity hardware, and t
 
 Slides live on [mimming.com](https://mimming.com/presos/internet-of-nodebots/)
 
-## Past Presentations
-[See tags](https://github.com/mimming/internet-of-nodebots/releases)
-
 ## About the deck
 
 Forked from the wonderful [reveal.js](https://github.com/hakimel/reveal.js)

@@ -17,42 +17,45 @@ var five = require("johnny-five"), board, button;
 
 board = new five.Board();
 
-board.on("ready", function() {
-  button = new five.Button(2);
-  var led = new five.Led(12);
+board.on("ready", function () {
+    button = new five.Button(2);
+    var led = new five.Led(12);
 
-  var config = {
-    apiKey: "CorrectHorseBatteryStapler",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "https://YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_BUCKET",
-    messagingSenderId: "YOUR_SENDER_ID"
-  };
-  firebase.initializeApp(config);
+    var config = {
+        apiKey: "CorrectHorseBatteryStapler",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        databaseURL: "https://YOUR_DATABASE_URL",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_BUCKET",
+        messagingSenderId: "YOUR_SENDER_ID"
+    };
+    firebase.initializeApp(config);
 
-	var db = firebase.database();
-	var ref = db.ref("button");
+    var db = firebase.database();
+    var ref = db.ref("button");
 
-	ref.on("value", function(snapshot) {
-		var val = snapshot.val();
+    // Listen for changes to the button state on Firebase Database
+    ref.on("value", function (snapshot) {
+        var val = snapshot.val();
 
-		if(val == "down") {
-      console.log("down");
-			led.on();
-		} else {
-			console.log("up");
-			led.off();
-		}
-	});
+        if (val == "down") {
+            console.log("down");
+            // Set new value on LED
+            led.on();
+        } else {
+            console.log("up");
+            led.off();
+        }
+    });
 
+    // Listen for button changes on hardware
+    button.on("down", function () {
+        // Set new value in Firebase
+        ref.set("down");
+    });
 
-  button.on("down", function() {
-		ref.set("down");
-  });
-
-  button.on("up", function() {
-		ref.set("up");
-  });
+    button.on("up", function () {
+        ref.set("up");
+    });
 });
 
